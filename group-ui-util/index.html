@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="selection.min.js"></script>
+
+  </head>
+  <body>
+
+    <style>
+
+   
+
+
+      .selection {
+          background: rgba(0, 0, 255, 0.1);
+          border-radius: 0.1em;
+          border: 0.05em solid rgba(0, 0, 255, 0.2);
+      }
+
+      .selectable{
+        display: block;
+        height: 100px;
+        width: 100px;
+        background: red;
+      }
+      .box-wrap{
+        padding: 2em;
+      }
+      ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 20px;
+        max-width: 90vw;
+        padding: 0;
+        margin: 32px auto;  
+        list-style-type: none;
+      }
+        
+      li {
+        aspect-ratio: 4 / 3;
+      }
+      li span{
+        display: block;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;  
+        object-fit: cover;
+      }
+
+      li.selected-thing{
+        background-color: aliceblue;
+      }
+
+      img.selected-thing{
+        filter: invert(1);
+      }
+
+    </style>
+
+    <div class="box-wrap" id="container" style="position:relative;">
+
+
+
+<ul id="list">
+
+
+
+
+
+</ul>
+
+
+
+  
+
+    </div>
+
+
+    <button id="download">DOWNLAOD</button>
+
+    <script>
+
+    let allIds = []
+ selection = Selection.create({
+
+                // Class for the selection-area
+                class: 'selection',
+
+                // All elements in this container can be selected
+                containers: ['.box-wrap'],
+
+                // The container is also the boundary in this case
+                boundaries: ['.box-wrap'],
+
+                onSelect(evt) {
+                    console.log(evt)
+                    // Check if clicked element is already selected
+                    const selected = evt.target.classList.contains('selected-thing');
+
+                    // Remove class if the user isn't pressing the control key or ⌘ key and the
+                    // current target is already selected
+                    if (!evt.originalEvent.ctrlKey && !evt.originalEvent.metaKey) {
+
+                        // Remove class from every element that is selected
+                        evt.selectedElements.forEach(s => s.classList.remove('selected-thing'));
+
+                        // Clear previous selection
+                        this.clearSelection();
+                    }
+
+                    if (!selected) {
+
+                        // Select element
+
+                        evt.target.classList.add('selected-thing');
+                        if (evt.target.parentNode.tagName == 'LI'){
+                          evt.target.parentNode.classList.add('selected-thing')
+                        }
+                        this.keepSelection();
+                    } else {
+
+                        // Unselect element
+                        evt.target.classList.remove('selected-thing');
+                        if (evt.target.parentNode.tagName == 'LI'){
+                          evt.target.parentNode.classList.remove('selected-thing')
+                        }                        
+                        this.removeFromSelection(evt.target);
+                        this.removeFromSelection(evt.target.parentNode);
+
+
+                    }
+                },
+
+                onStart({selectedElements, originalEvent}) {
+
+                    // if (vueApp.currentMode() === 'text'){
+                    //     document.getElementById('text-area').blur()
+                    // }else{
+
+                    //    Array.from(document.getElementsByClassName('textarea-resize')).forEach(s => s.blur())
+                    //    Array.from(document.getElementsByClassName('pls-blur')).forEach(s => s.blur())
+
+
+                    // }
+
+                    // Remove class if the user isn't pressing the control key or ⌘ key
+                    if (!originalEvent.ctrlKey && !originalEvent.metaKey) {
+
+                        // Unselect all elements
+                        selectedElements.forEach(s => s.classList.remove('selected-thing'));
+
+                        // Clear previous selection
+                        this.clearSelection();
+                    }
+                },
+
+                onMove({selectedElements, changedElements}) {
+                    document.getElementById('container').classList.remove('selected-thing')
+
+                    // Add a custom class to the elements that where selected.
+                    selectedElements.forEach(s => s.classList.add('selected-thing'));
+
+                    // Remove the class from elements that where removed
+                    // since the last selection
+                    changedElements.removed.forEach(s => s.classList.remove('selected-thing'));
+                },
+
+                onStop(event) {
+                  
+                  // document.getElementById('container').classList.remove('selected-thing')
+
+
+
+                    
+
+
+                }
+            });
+
+
+        document.addEventListener('keydown', (event)=>{
+
+
+          if (event.key == 'Enter' || event.code == "Enter"){
+
+                let ids = []
+                for (el of document.querySelectorAll('li.selected-thing')){
+                    ids.push(parseInt(el.dataset.id))
+
+                }
+
+                allIds.push(ids)
+                Array.from(document.querySelectorAll('.selected-thing')).forEach((el) => el.classList.remove('selected-thing'));
+
+          }
+
+          if (event.key == 'Escape' || event.code == "Escape"){
+                Array.from(document.querySelectorAll('.selected-thing')).forEach((el) => el.classList.remove('selected-thing'));
+
+          }
+
+
+        })
+
+
+        document.getElementById('download').addEventListener('click', (event)=>{
+
+              var blob = new Blob([JSON.stringify(allIds)], {
+                type: "application/json"
+              });
+              saveAs(blob, 'anthony-correspondence-id-sets.json');
+        })
+
+        
+        fetch('anthony-correspondence.json')
+        .then((response) => response.json())
+        .then((data) => {
+
+          for (let item of data){
+
+            let itemEl = document.createElement('li')
+            let itemElSpan1 = document.createElement('span')
+            let itemElSpan2 = document.createElement('span')
+            let itemElImg = document.createElement('img')
+
+            itemElSpan1.innerText = item.date
+            itemElSpan2.innerText = item.salutation
+            itemElImg.setAttribute('src',item.img)
+            itemElImg.setAttribute('loading','lazy')
+            itemElImg.setAttribute('title',item.id + "\n" + item.text)
+
+            itemEl.append(itemElSpan1)
+            itemEl.append(itemElSpan2)
+            itemEl.append(itemElImg)
+
+            itemEl.setAttribute('data-id',item.id)
+
+
+            document.getElementById('list').append(itemEl)
+
+
+          }
+          loading="lazy"
+
+
+          console.log(data)
+
+        })
+
+
+
+    </script>      
+
+
+
+  </body>
+</html>

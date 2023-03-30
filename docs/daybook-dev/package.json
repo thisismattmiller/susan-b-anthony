@@ -1,0 +1,26 @@
+{
+  "name": "daybook",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.47",
+    "vue-drag-resize": "^1.5.4",
+    "vue-final-modal": "^4.0.11",
+    "vue-toastification": "^2.0.0-rc.5",
+    "vue3-drag-resize": "^2.0.5",
+    "vue3-spinner": "^0.0.16",
+    "vue3-toggle-button": "^1.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.1.4"
+  }
+}
