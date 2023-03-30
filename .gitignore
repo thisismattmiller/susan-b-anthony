@@ -164,6 +164,8 @@ docs/writings-dev/node_modules/@vueuse/shared/node_modules/.bin/vue-demi-fix
 docs/writings-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-switch
 docs/writings-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-fix
 docs/writings-dev/public/susan-b-anthony/json
+docs/writings-dev/public/susan-b-anthony/
+docs/writings-dev/public/susan-b-anthony
 docs/correspondence-dev/node_modules/.bin/browserslist
 docs/correspondence-dev/node_modules/.bin/autoprefixer
 docs/correspondence-dev/node_modules/.bin/resolve
@@ -188,6 +190,8 @@ docs/correspondence-dev/node_modules/@vueuse/shared/node_modules/.bin/vue-demi-f
 docs/correspondence-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-switch
 docs/correspondence-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-fix
 docs/correspondence-dev/public/susan-b-anthony/json
+docs/correspondence-dev/public/susan-b-anthony/
+docs/correspondence-dev/public/susan-b-anthony
 docs/daybook-dev/node_modules/.bin/browserslist
 docs/daybook-dev/node_modules/.bin/autoprefixer
 docs/daybook-dev/node_modules/.bin/resolve
@@ -212,6 +216,8 @@ docs/daybook-dev/node_modules/@vueuse/shared/node_modules/.bin/vue-demi-fix
 docs/daybook-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-switch
 docs/daybook-dev/node_modules/@vueuse/integrations/node_modules/.bin/vue-demi-fix
 docs/daybook-dev/public/susan-b-anthony/json
+docs/daybook-dev/public/susan-b-anthony/
+docs/daybook-dev/public/susan-b-anthony
 docs/compare-dev/node_modules/.bin/rimraf
 docs/compare-dev/node_modules/.bin/resolve
 docs/compare-dev/node_modules/.bin/nanoid
@@ -228,3 +234,4 @@ docs/compare-dev/node_modules/.bin/eslint
 docs/compare-dev/node_modules/.bin/esbuild
 docs/compare-dev/node_modules/.bin/cssesc
 docs/compare-dev/public/susan-b-anthony
+docs/compare-dev/public/susan-b-anthony/
