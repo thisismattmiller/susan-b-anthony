@@ -1,5 +1,16 @@
 <script>
 
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    var items = location.search.substr(1).split("&");
+    for (var index = 0; index < items.length; index++) {
+        tmp = items[index].split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    }
+    return result;
+}
+
 
 export default {
   components: {
@@ -39,6 +50,29 @@ export default {
 
     console.log(this.compareData)
 
+
+    this.$nextTick(() => {
+      this.$nextTick(() => {
+
+
+        if (findGetParameter('year')){
+          this.doYear=findGetParameter('year')
+        }
+        if (findGetParameter('page')){
+          console.log(findGetParameter('page'))
+          window.setTimeout(()=>{
+            console.log(document.getElementById(findGetParameter('page')))
+            document.getElementById(findGetParameter('page')).scrollIntoView({
+              behavior: 'smooth'
+            });
+
+          },500)
+        }
+      })
+    })
+
+
+
     // this.daybookSelected = this.index.daybooks[this.randomBook].date
 
 
@@ -76,7 +110,7 @@ export default {
 
     <template v-for="file in compareData[doYear]">
       <a target="_blank" :href="`https://www.loc.gov/resource/${file.digital_id}/?sp=${file.page}&st=text`">{{`https://www.loc.gov/resource/${file.digital_id}/?sp=${file.page}`}}</a>
-      <table>
+      <table :id="file.page">
 
         <thead>
           <tr>
@@ -89,6 +123,7 @@ export default {
         <tr v-for="(x,idx) in [...Array(file.most_entries)].map((_, i) => i * file.most_entries)" >
 
           <template v-for="gpt in ['3','3.5','4']">
+
             <td>
               <template v-if="file[gpt][idx] !== false">
                 

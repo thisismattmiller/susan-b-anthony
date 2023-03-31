@@ -483,7 +483,7 @@ export default {
       <div class="grid grid-cols-1 sm:grid-cols-10">
         <div class="col-span-8 pb-2 pr-2">
             <div class="mt-0 mb-2 text-2xl font-medium leading-tight">Susan B. Anthony - Correspondence</div>
-            <div class="text-sm">Below is extracted data from Susan B. Anthony’s correspondence, a <a href="https://crowd.loc.gov/campaigns/susan-b-anthony-papers/anthony-correspondence/" style="text-decoration:underline;">collection housed at the Library of Congress</a>. Click the summarized text or the triangle in each entry to expand to see more data and functionality. This blog post describes how and why this data was created.</div>
+            <div class="text-sm">Below is extracted data from Susan B. Anthony’s correspondence, a <a href="https://crowd.loc.gov/campaigns/susan-b-anthony-papers/anthony-correspondence/" style="text-decoration:underline;">collection housed at the Library of Congress</a>. Click the summarized text or the triangle in each entry to expand to see more data and functionality. This <a href="https://thisismattmiller.com/post/using-gpt-on-library-collections/">blog post</a> describes how and why this data was created.</div>
 
         </div>
 
